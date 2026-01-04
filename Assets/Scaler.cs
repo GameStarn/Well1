@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Scale : MonoBehaviour
+public class Scaler : MonoBehaviour
 {
     [SerializeField] private Vector3 _scale = new Vector3(0.1f, 0.1f, 0.1f);
     [SerializeField] private float _speed = 1f;
