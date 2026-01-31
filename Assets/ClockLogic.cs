@@ -16,6 +16,15 @@ public class ClockLogic : MonoBehaviour
     private int _bonusAmount = 10;
     private int _clicksToPause = 2;
 
+    private WaitForSeconds _updateWait;
+    private WaitForSeconds _pauseWait;
+
+    private void Awake()
+    {
+        _updateWait = new WaitForSeconds(_updateInterval);
+        _pauseWait = new WaitForSeconds(_pauseDuration);
+    }
+
     private void OnEnable() => StartCoroutine(CounterRoutime());
     private void OnDisable() => StopAllCoroutines();
 
@@ -24,17 +33,13 @@ public class ClockLogic : MonoBehaviour
         _count += _bonusAmount;
         _clickCount++;
 
-        if (Input.GetMouseButtonDown(0))
+        if (_clickCount >= _clicksToPause)
         {
-
-            if (_clickCount == _clicksToPause)
-            {
-                _isPaused = true;
-                _clickCount = 0;
-            }
-
-            OnCountChanged?.Invoke(_count);
+            _isPaused = true;
+            _clickCount = 0;
         }
+
+        OnCountChanged?.Invoke(_count);
     }
 
     private IEnumerator CounterRoutime()
@@ -46,12 +51,12 @@ public class ClockLogic : MonoBehaviour
 
             if (_isPaused)
             {
-                yield return new WaitForSeconds(_pauseDuration);
+                yield return _pauseWait;
                 _isPaused = false;
             }
             else
             {
-                yield return new WaitForSeconds(_updateInterval);
+                yield return _updateWait;
             }
         }
     }
