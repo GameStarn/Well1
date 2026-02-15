@@ -11,7 +11,7 @@ public class CubeSpawner : MonoBehaviour
     private int _minRand = 2;
     private int _maxRand = 7;
 
-    public void Spawn(Vector3 position, Vector3 scale, float chance)
+    public void Spawn(Vector3 position, Vector3 scale, float chance, CubeExplosion explosion)
     {
         if(Random.Range(_minChance, _maxChance) > chance) return;
 
@@ -30,6 +30,12 @@ public class CubeSpawner : MonoBehaviour
             if (color != null )
             {
                 color.Color();
+            }
+
+            Rigidbody rigidbody = newCube.GetComponent<Rigidbody>();
+            if( rigidbody != null )
+            {
+                explosion.Explosion(rigidbody, position);
             }
         }
     }

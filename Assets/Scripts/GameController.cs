@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class GameController : MonoBehaviour
     {
         Rigidbody rigidbody = cube.GetComponent<Rigidbody>();
 
-        _spawner.Spawn(cube.transform.position, cube.transform.localScale, cube.Chance);
+        _spawner.Spawn(cube.transform.position, cube.transform.localScale, cube.Chance, _explosion);
 
         _explosion.Explosion(rigidbody, cube.transform.position);
 
