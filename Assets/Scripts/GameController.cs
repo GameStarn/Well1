@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private CubeSpawner _spawner;
     [SerializeField] private InputRaycaster _inputRaycaster;
 
-    void Start()
+    private void Start()
     {
         _inputRaycaster.OnCubeClicked += HandleCubeClicked;
     }

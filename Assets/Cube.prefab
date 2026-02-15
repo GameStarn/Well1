@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8efc737733cf3e743a732cffcae1c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cube: {fileID: 2862469816318299360}
   _chance: 100
 --- !u!114 &3064259106922823517
 MonoBehaviour:

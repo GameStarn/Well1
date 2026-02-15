@@ -12,9 +12,7 @@ public class CubeExplosion : MonoBehaviour
     public void Explosion(Rigidbody rigidbody, Vector3 position)
     {
         if (rigidbody == null) return;
-        {
-            rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius, _upwardModifier, ForceMode.Impulse);
-        }
 
+        rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius, _upwardModifier, ForceMode.Impulse);
     }
 }
