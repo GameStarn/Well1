@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 144062267}
   - component: {fileID: 144062270}
   - component: {fileID: 144062269}
+  - component: {fileID: 144062271}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -184,7 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c465719df9a31408846a7dc401778c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubePrefab: {fileID: 2862469816318299360, guid: 2703f769a5893aa49afb767f2082057b, type: 3}
+  _cubePrefab: {fileID: 8895253118318581151, guid: 2703f769a5893aa49afb767f2082057b, type: 3}
+  _cubeChance: {fileID: 144062271}
 --- !u!114 &144062270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +202,18 @@ MonoBehaviour:
   _explosionForce: 5
   _explosionRadius: 2
   _upwardModifier: 0.5
+--- !u!114 &144062271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144062266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42e0992befdd524b90a52752a7b4a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &518557392
 GameObject:
   m_ObjectHideFlags: 0
