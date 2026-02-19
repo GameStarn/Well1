@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Raycaster : MonoBehaviour
 {
-    public event System.Action<Cube> OnCubeClicked;
-
     [SerializeField] private UserInput _userInput;
+
+    public event System.Action<Cube> CubeClicked;
 
     private void OnEnable()
     {
         if (_userInput != null)
-            _userInput.OnClick += HandleClick;
+            _userInput.Click += HandleClick;
     }
 
     private void OnDisable()
     {
         if (_userInput != null)
-            _userInput.OnClick -= HandleClick;
+            _userInput.Click -= HandleClick;
     }
 
     private void HandleClick()
@@ -28,7 +28,7 @@ public class Raycaster : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<Cube>(out Cube cube))
             {
-                OnCubeClicked?.Invoke(cube);
+                CubeClicked?.Invoke(cube);
             }
         }
     }

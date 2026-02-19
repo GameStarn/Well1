@@ -12,11 +12,11 @@ public class Game : MonoBehaviour
 
     private void OnEnable()
     {
-        _raycaster.OnCubeClicked += HandleCubeClicked;
+        _raycaster.CubeClicked += HandleCubeClicked;
     }
     private void OnDestroy()
     {
-        _raycaster.OnCubeClicked -= HandleCubeClicked;
+        _raycaster.CubeClicked -= HandleCubeClicked;
     }
 
     private void HandleCubeClicked(Cube cube)
@@ -27,14 +27,11 @@ public class Game : MonoBehaviour
 
         if (_chance.ShouldSpawn(chance))
         {
-            List<GameObject> newCubes = _spawner.Spawn(position, scale, chance);
+            List<Cube> newCubes = _spawner.Spawn(position, scale, chance);
             List<Rigidbody> rigidbodiesToExplode = new List<Rigidbody>();
 
-            foreach (GameObject newCube in newCubes)
+            foreach (Cube newCube in newCubes)
             {
-                if (newCube.TryGetComponent(out RandomColor newColor))
-                    newColor.SetRandomColor();
-
                 if (newCube.TryGetComponent(out Rigidbody rd))
                     rigidbodiesToExplode.Add(rd);
 

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class UserInput : MonoBehaviour
 {
-    public event System.Action OnClick;
+    public event System.Action Click;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            OnClick?.Invoke();
+            Click?.Invoke();
         }
     }
 }
