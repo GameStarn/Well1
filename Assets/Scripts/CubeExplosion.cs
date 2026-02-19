@@ -9,10 +9,13 @@ public class CubeExplosion : MonoBehaviour
     [SerializeField] private float _explosionRadius = 2f;
     [SerializeField] private float _upwardModifier = 0.5f;
 
-    public void Explosion(Rigidbody rigidbody, Vector3 position)
+    public void Explosion(List<Rigidbody> rigidbodys, Vector3 position)
     {
-        if (rigidbody == null) return;
+        foreach (Rigidbody rb in rigidbodys)
+        {
+            if (rigidbodys == null) return;
 
-        rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius, _upwardModifier, ForceMode.Impulse);
+            rb.AddExplosionForce(_explosionForce, position, _explosionRadius, _upwardModifier, ForceMode.Impulse);
+        }
     }
 }

@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _userInput: {fileID: 1961522144}
-  _Raycaster: {fileID: 1961522143}
+  _raycaster: {fileID: 1961522143}
   _spawner: {fileID: 144062269}
   _explosion: {fileID: 144062270}
   _color: {fileID: 986203897}

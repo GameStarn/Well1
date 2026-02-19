@@ -6,9 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class RandomColor : MonoBehaviour
 {
-    public void Color()
+    private Renderer _renderer;
+
+    private void Awake()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.material.color = Random.ColorHSV();
+        _renderer = GetComponent<Renderer>();
+    }
+
+    public void SetRandomColor()
+    {
+        _renderer.material.color = Random.ColorHSV();
     }
 }
