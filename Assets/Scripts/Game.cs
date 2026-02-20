@@ -14,7 +14,7 @@ public class Game : MonoBehaviour
     {
         _raycaster.CubeClicked += HandleCubeClicked;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         _raycaster.CubeClicked -= HandleCubeClicked;
     }
@@ -25,6 +25,8 @@ public class Game : MonoBehaviour
         Vector3 scale = cube.transform.localScale;
         float chance = cube.Chance;
 
+        _explosion.Explosion(position);
+
         if (_chance.ShouldSpawn(chance))
         {
             List<Cube> newCubes = _spawner.Spawn(position, scale, chance);
@@ -34,8 +36,6 @@ public class Game : MonoBehaviour
             {
                 if (newCube.TryGetComponent(out Rigidbody rd))
                     rigidbodiesToExplode.Add(rd);
-
-                _explosion.Explosion(rigidbodiesToExplode, position);
             }
         }
         Destroy(cube.gameObject);

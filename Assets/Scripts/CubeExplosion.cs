@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class CubeExplosion : MonoBehaviour
 {
-    [SerializeField] private float _explosionForce = 5f;
-    [SerializeField] private float _explosionRadius = 2f;
-    [SerializeField] private float _upwardModifier = 0.5f;
+    [SerializeField] private float _explosionForce = 10f;
+    [SerializeField] private float _explosionRadius = 4f;
+    [SerializeField] private float _upwardModifier = 1f;
 
-    public void Explosion(List<Rigidbody> rigidbodys, Vector3 position)
+    public void Explosion(Vector3 position)
     {
-        foreach (Rigidbody rb in rigidbodys)
-        {
-            if (rigidbodys == null) return;
+        Collider[] colliders = Physics.OverlapSphere(position, _explosionRadius);
 
-            rb.AddExplosionForce(_explosionForce, position, _explosionRadius, _upwardModifier, ForceMode.Impulse);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.TryGetComponent(out Rigidbody rb))
+            {
+                rb.AddExplosionForce(_explosionForce, position, _explosionRadius, _upwardModifier, ForceMode.Impulse);
+            }
         }
     }
 }
