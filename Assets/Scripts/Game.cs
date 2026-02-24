@@ -1,43 +1,46 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private UserInput _userInput;
-    [SerializeField] private Raycaster _raycaster;
-    [SerializeField] private CubeSpawner _spawner;
-    [SerializeField] private CubeExplosion _explosion;
-    [SerializeField] private RandomColor _color;
-    [SerializeField] private CubeChance _chance;
+    [SerializeField] private CubeSpawner _cubeSpawner;
+    [SerializeField] private GameObject _cubePrefab;
 
-    private void OnEnable()
+    private ObjectPool<Cube> _pool;
+
+    private void Awake()
     {
-        _raycaster.CubeClicked += HandleCubeClicked;
-    }
-    private void OnDisable()
-    {
-        _raycaster.CubeClicked -= HandleCubeClicked;
+        _pool = new ObjectPool<Cube>(CreateCube, OnTakeFromPool, OnReturnToPool, OnDestroyCube, true, 10, 100);
+
+        _cubeSpawner.Init(_pool);
     }
 
-    private void HandleCubeClicked(Cube cube)
+    private Cube CreateCube()
     {
-        Vector3 position = cube.transform.position;
-        Vector3 scale = cube.transform.localScale;
-        float chance = cube.Chance;
+        Cube cube = Instantiate(_cubePrefab).GetComponent<Cube>();
+        cube.SetPool(_pool);
+        return cube;
+    }
 
-        _explosion.Explosion(position);
+    private void OnTakeFromPool(Cube cube)
+    {
+        cube.gameObject.SetActive(true);
 
-        if (_chance.ShouldSpawn(chance))
+        if(cube.TryGetComponent(out CubeCollor collor))
         {
-            List<Cube> newCubes = _spawner.Spawn(position, scale, chance);
-            List<Rigidbody> rigidbodiesToExplode = new List<Rigidbody>();
-
-            foreach (Cube newCube in newCubes)
-            {
-                if (newCube.TryGetComponent(out Rigidbody rd))
-                    rigidbodiesToExplode.Add(rd);
-            }
+            collor.ResetColor();
         }
+    }
+
+    private void OnReturnToPool(Cube cube)
+    {
+        cube.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyCube(Cube cube)
+    {
         Destroy(cube.gameObject);
     }
 }
