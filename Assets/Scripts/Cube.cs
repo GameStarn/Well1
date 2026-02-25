@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,31 +6,25 @@ using UnityEngine.Pool;
 
 public class Cube : MonoBehaviour
 {
-    private ObjectPool<Cube> _pool;
+    public event Action<Cube> LifeEnded;
 
     private int _minLife = 2;
     private int _maxLife = 5;
-
-    private bool _isReturning = false;
-
-    public void SetPool(ObjectPool<Cube> pool)
-    {
-        _pool = pool;
-    }
+    private bool _isActive = false;
 
     public void StartLifeTimeer()
     {
-        if (_isReturning) return;
+        if (_isActive) return;
 
-        _isReturning = true;
+        _isActive = true;
 
-        int lifeTime = Random.Range(_minLife, _maxLife);
-        Invoke(nameof(ReturnToPool), lifeTime);
+        int lifeTime = UnityEngine.Random.Range(_minLife, _maxLife);
+        Invoke(nameof(EndLife), lifeTime);
     }
 
-    public void ReturnToPool()
+    public void EndLife()
     {
-        _isReturning = false;
-        _pool.Release(this);
+        _isActive = false;
+        LifeEnded.Invoke(this);
     }
 }

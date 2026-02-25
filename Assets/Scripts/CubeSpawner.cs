@@ -10,15 +10,9 @@ public class CubeSpawner : MonoBehaviour
 
     private ObjectPool<Cube> _pool;
 
-    private CubeDestroy _cubeDestroy;
-
     public void Init(ObjectPool<Cube> pool)
     {
         _pool = pool;
-    }
-
-    private void Start()
-    {
         StartCoroutine(SpawnRoutine());
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeDestroy : MonoBehaviour
+public class CollisionHandler : MonoBehaviour
 {
 
     public void OnTriggerEnter(Collider other)
@@ -12,7 +12,7 @@ public class CubeDestroy : MonoBehaviour
             cube.StartLifeTimeer();
         }
 
-        if(other.TryGetComponent(out CubeCollor collor))
+        if(other.TryGetComponent(out ColorChanger collor))
         {
             collor.SetRandomCollor();
         }
