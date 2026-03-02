@@ -13,7 +13,7 @@ public class ColorChanger : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
-    public void SetRandomCollor()
+    public void SetRandomColor()
     {
         _renderer.material = _primaryMaterial;
     }

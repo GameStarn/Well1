@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionHandler : MonoBehaviour
+public class Platform : MonoBehaviour
 {
-
     public void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Cube cube))
+        if (other.TryGetComponent(out ColorChanger color))
         {
-            cube.StartLifeTimeer();
+            color.SetRandomColor();
         }
     }
 }

@@ -10,7 +10,9 @@ public class Cube : MonoBehaviour
 
     private int _minLife = 2;
     private int _maxLife = 5;
+
     private bool _isActive = false;
+    private Coroutine _lifeCoroutine;
 
     public void StartLifeTimeer()
     {
@@ -19,12 +21,18 @@ public class Cube : MonoBehaviour
         _isActive = true;
 
         int lifeTime = UnityEngine.Random.Range(_minLife, _maxLife);
-        Invoke(nameof(EndLife), lifeTime);
+        _lifeCoroutine = StartCoroutine(LifeRoutine(lifeTime));
+    }
+
+    public IEnumerator LifeRoutine(float lifeTime)
+    {
+        yield return new WaitForSeconds(lifeTime);
+        EndLife();
     }
 
     public void EndLife()
     {
         _isActive = false;
-        LifeEnded.Invoke(this);
+        LifeEnded?.Invoke(this);
     }
 }
