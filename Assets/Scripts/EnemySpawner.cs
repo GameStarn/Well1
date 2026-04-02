@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _EnemyPrefab;
+    [SerializeField] private EnemyPrefab _enemyPrefab;
     [SerializeField] private RandomDirection _randomDirection;
     [SerializeField] private float _delay = 2f;
 
     [SerializeField] private Transform[] _spawnPoint;
+
+    private EnemyMovement _enemyMovement;
 
     private void Start()
     {
@@ -17,22 +19,30 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
+        WaitForSeconds wait = new WaitForSeconds(_delay);
+
         while (true)
         {
-            EnemyCrafter();
+            CraftEnemys();
 
-            yield return new WaitForSeconds(_delay);
+            yield return wait;
         }
     }
 
-    public void EnemyCrafter()
+    public void CraftEnemys()
     {
         int randomIndex = Random.Range(0, _spawnPoint.Length);
-
-        Quaternion randomRotation = _randomDirection.GetRandomRotation();
-
         Vector3 spawnPos = _spawnPoint[randomIndex].position;
 
-        Instantiate(_EnemyPrefab, spawnPos, randomRotation);
+        Vector3 direction = _randomDirection.GetRandomDirection();
+
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        EnemyPrefab enemy = Instantiate(_enemyPrefab, spawnPos, rotation);
+
+        if (enemy.TryGetComponent(out EnemyMovement movement))
+        {
+            movement.Init(direction);
+        }
     }
 }

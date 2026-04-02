@@ -5,9 +5,11 @@ using UnityEngine.UIElements;
 
 public class RandomDirection : MonoBehaviour
 {
-    public Quaternion GetRandomRotation()
+    public Vector3 GetRandomDirection()
     {
         float randomY = Random.Range(0f, 360f);
-        return Quaternion.Euler(0, randomY, 0);
+        Quaternion rotation =  Quaternion.Euler(0, randomY, 0);
+
+        return rotation * Vector3.forward;
     }
 }
