@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b108041d256918042bfcf5164f6a108d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 801017351581333863, guid: 6d778518f4901654e9ce469dc94ed312, type: 3}
+  _enemyPrefab: {fileID: -2245873484988823560, guid: 6d778518f4901654e9ce469dc94ed312, type: 3}
   _randomDirection: {fileID: 4543625546164142047, guid: 6d778518f4901654e9ce469dc94ed312, type: 3}
   _delay: 2
   _spawnPoint:

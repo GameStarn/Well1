@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnamyDestray : MonoBehaviour
+public class ObjectDestroer : MonoBehaviour
 {
     [SerializeField] private float _lifeTime = 10f;
 
